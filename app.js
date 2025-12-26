@@ -1,10 +1,44 @@
 const videos=[
-{title:"Top 30 JavaScript Interview Questions 2025",channel:"Intellipaat",cat:"javascript",thumb:"https://i.ytimg.com/vi/hdI2bqOjy3c/maxresdefault.jpg"},
-{title:"DOES GOD EXIST? Complete Video",channel:"Hajira Umer Kitchen",cat:"podcast",thumb:"https://i.ytimg.com/vi/PkZNo7MFNFg/maxresdefault.jpg"},
-{title:"AJ ka Horoscope | Lawyer aur Comedy",channel:"Triple Trouble",cat:"podcast",thumb:"https://i.ytimg.com/vi/9He4UBLyk8Y/maxresdefault.jpg"},
-{title:"Mix – Indian Pop",channel:"YouTube Mix",cat:"music",thumb:"https://i.ytimg.com/vi/PoRJizFvM7s/maxresdefault.jpg"},
-{title:"Big Arrest Late Night Headlines",channel:"Dunya News",cat:"news",thumb:"https://i.ytimg.com/vi/tgbNymZ7vqY/maxresdefault.jpg"},
-{title:"PIA Privatized Successfully",channel:"24 News HD",cat:"news",thumb:"https://i.ytimg.com/vi/ysz5S6PUM-U/maxresdefault.jpg"}
+{
+title:"Top 30 JavaScript Interview Questions 2025",
+desc:"Most asked JavaScript interview questions explained",
+channel:"Intellipaat",
+views:"317K views",
+time:"1 year ago",
+duration:"1:35:43",
+cat:"coding",
+thumb:"https://i.ytimg.com/vi/hdI2bqOjy3c/maxresdefault.jpg"
+},
+{
+title:"Full Stack Developer Roadmap",
+desc:"Complete roadmap to become a full stack developer",
+channel:"Muhammad Hasan Dev",
+views:"210K views",
+time:"8 months ago",
+duration:"42:11",
+cat:"coding",
+thumb:"https://i.ytimg.com/vi/9He4UBLyk8Y/maxresdefault.jpg"
+},
+{
+title:"DOES GOD EXIST? Complete Video",
+desc:"Academic discussion and debate",
+channel:"Hajira Umer Kitchen",
+views:"1.9M views",
+time:"6 days ago",
+duration:"1:54:11",
+cat:"podcast",
+thumb:"https://i.ytimg.com/vi/PkZNo7MFNFg/maxresdefault.jpg"
+},
+{
+title:"Big Arrest Late Night Headlines",
+desc:"Breaking news update Pakistan",
+channel:"Dunya News",
+views:"2K views",
+time:"1 hour ago",
+duration:"8:36",
+cat:"news",
+thumb:"https://i.ytimg.com/vi/tgbNymZ7vqY/maxresdefault.jpg"
+}
 ]
 
 const grid=document.getElementById("grid")
@@ -17,12 +51,16 @@ list.map(v=>{
 const d=document.createElement("div")
 d.className="card"
 d.innerHTML=`
-<img src="${v.thumb}">
+<div class="thumb-wrap">
+<img class="thumb" src="${v.thumb}">
+<span class="duration">${v.duration}</span>
+</div>
 <div class="info">
-<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23333'/><text x='50%' y='55%' fill='white' font-size='90' text-anchor='middle' font-family='Arial'>M</text></svg>">
+<img src="profile.jpg">
 <div class="text">
 <h4>${v.title}</h4>
 <p>${v.channel}</p>
+<p>${v.views} • ${v.time}</p>
 </div>
 </div>`
 grid.appendChild(d)
@@ -33,8 +71,20 @@ render(videos)
 
 search.oninput=e=>{
 const q=e.target.value.toLowerCase()
-render(videos.filter(v=>v.title.toLowerCase().includes(q)))
+render(videos.filter(v=>
+v.title.toLowerCase().includes(q) ||
+v.desc.toLowerCase().includes(q)
+))
 }
+
+chips.forEach(c=>{
+c.onclick=()=>{
+chips.forEach(x=>x.classList.remove("active"))
+c.classList.add("active")
+const k=c.dataset.cat
+render(k==="all"?videos:videos.filter(v=>v.cat===k))
+}
+})}
 
 chips.forEach(c=>{
 c.onclick=()=>{
