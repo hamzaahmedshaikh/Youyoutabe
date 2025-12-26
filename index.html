@@ -1,83 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YouTube 2025 — Clone</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar">
-<div class="left">
-<button id="menuBtn" class="icon-btn"><i class="fa-solid fa-bars"></i></button>
-<div class="brand">
-<svg class="brand-mark" viewBox="0 0 100 30" aria-hidden="true" focusable="false">
-<rect width="100" height="30" rx="6" fill="#ff0000"></rect>
-<path d="M18 20 L30 15 L18 10 Z" fill="#fff"></path>
-</svg>
-<div class="brand-text">YouTube<span class="year">2025</span></div>
-</div>
-</div>
-<div class="search-wrap">
-<div class="search-input">
-<i class="fa-solid fa-magnifying-glass"></i>
-<input id="searchInput" placeholder="Search" autocomplete="off">
-<button id="clearSearch" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
-</div>
-<div class="filters">
-<select id="categorySelect" aria-label="Category filter">
-<option value="all">All</option>
-</select>
-<button id="findBtn" class="btn">Find</button>
-</div>
-</div>
-<div class="right">
-<button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-<button class="icon-btn"><i class="fa-solid fa-video"></i></button>
-<div class="profile">
-<img id="profilePic" src="profile.jpg" alt="profile">
-<div class="profile-name">Hamza Ahmed Shaikh</div>
-</div>
-</div>
+
+<header class="top">
+  <div class="left">
+    <i class="fa-solid fa-bars"></i>
+    <span class="logo">YouTube</span>
+  </div>
+
+  <div class="center">
+    <input id="search" placeholder="Search">
+    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    <i class="fa-solid fa-microphone"></i>
+  </div>
+
+  <div class="right">
+    <i class="fa-solid fa-plus"></i>
+    <i class="fa-regular fa-bell"></i>
+    <img class="avatar" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23333'/><text x='50%' y='55%' fill='white' font-size='90' text-anchor='middle' font-family='Arial'>H</text></svg>">
+  </div>
 </header>
-<main class="main">
-<aside class="sidebar">
-<nav class="nav-cats">
-<ul id="categoryList"></ul>
-</nav>
-<div class="shortcuts">
-<button class="chip active" data-cat="all">Home</button>
-<button class="chip" data-cat="Development">Development</button>
-<button class="chip" data-cat="Education">Education</button>
-<button class="chip" data-cat="Design">Design</button>
-<button class="chip" data-cat="DevOps">DevOps</button>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="item"><i class="fa-solid fa-house"></i><span>Home</span></div>
+    <div class="item"><i class="fa-solid fa-bolt"></i><span>Shorts</span></div>
+    <div class="item"><i class="fa-solid fa-folder"></i><span>Subscriptions</span></div>
+    <div class="item"><i class="fa-solid fa-user"></i><span>You</span></div>
+  </aside>
+
+  <main>
+    <div class="chips">
+      <button class="chip active" data-cat="all">All</button>
+      <button class="chip" data-cat="javascript">JavaScript</button>
+      <button class="chip" data-cat="news">News</button>
+      <button class="chip" data-cat="podcast">Podcasts</button>
+      <button class="chip" data-cat="music">Music</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </main>
 </div>
-</aside>
-<section class="content">
-<div class="controls">
-<div class="left-controls">
-<div class="badge">All videos</div>
-</div>
-<div class="right-controls">
-<label for="sortSelect" class="muted">Sort</label>
-<select id="sortSelect">
-<option value="relevance">Relevance</option>
-<option value="newest">Newest</option>
-<option value="oldest">Oldest</option>
-</select>
-</div>
-</div>
-<div id="videoGrid" class="grid" role="list"></div>
-</section>
-</main>
-<div id="playerModal" class="modal" aria-hidden="true">
-<div class="modal-card">
-<button id="closeModal" class="close"><i class="fa-solid fa-xmark"></i></button>
-<div id="playerContent"></div>
-</div>
-</div>
+
 <script src="app.js"></script>
 </body>
 </html>
