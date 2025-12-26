@@ -1,40 +1,49 @@
-const videos = [
-{"id":"v1","title":"Modern JavaScript Patterns 2025","desc":"Practical patterns and tips for writing clean, maintainable JavaScript.","thumb":"https://images.unsplash.com/photo-1526378721641-3b9b6f7f6b1b?q=80&w=1400&auto=format&fit=crop","category":"Education","channel":"Muhammad Hasan Dev","date":"2025-06-12","views":"124K","duration":"12:34"},
-{"id":"v2","title":"Build a Fast Portfolio Site","desc":"Step-by-step guide to build a blazing fast portfolio with modern tooling.","thumb":"https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1400&auto=format&fit=crop","category":"Development","channel":"Muhammad Hasan Dev","date":"2025-04-02","views":"89K","duration":"18:02"},
-{"id":"v3","title":"CSS Grid & Flexbox Mastery","desc":"Combine Grid and Flexbox to create responsive layouts that scale.","thumb":"https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop","category":"Design","channel":"Design Lab","date":"2024-11-20","views":"210K","duration":"22:10"},
-{"id":"v4","title":"Node.js Performance Checklist","desc":"Small changes that yield big performance improvements in Node.js apps.","thumb":"https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop","category":"Development","channel":"Server Side","date":"2025-01-15","views":"47K","duration":"9:45"},
-{"id":"v5","title":"Deploy with GitHub Actions","desc":"Automate builds, tests, and deployments using GitHub Actions workflows.","thumb":"https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop","category":"DevOps","channel":"CI/CD Academy","date":"2023-09-10","views":"33K","duration":"14:20"},
-{"id":"v6","title":"TypeScript Tips for Teams","desc":"Type-safe patterns that help teams scale codebases without friction.","thumb":"https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1400&auto=format&fit=crop","category":"Education","channel":"Muhammad Hasan Dev","date":"2025-03-05","views":"76K","duration":"11:12"},
-{"id":"v7","title":"Design Systems in Practice","desc":"How to build and maintain a design system that designers and engineers love.","thumb":"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1400&auto=format&fit=crop","category":"Design","channel":"Design Lab","date":"2024-07-22","views":"58K","duration":"27:05"},
-{"id":"v8","title":"Kubernetes for Developers","desc":"A practical intro to Kubernetes concepts developers actually need.","thumb":"https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop","category":"DevOps","channel":"Cloud Native","date":"2025-02-28","views":"99K","duration":"16:40"},
-{"id":"v9","title":"Frontend Performance Audit","desc":"Tools and techniques to audit and improve frontend performance.","thumb":"https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop","category":"Development","channel":"Performance Pro","date":"2024-12-05","views":"41K","duration":"8:50"},
-{"id":"v10","title":"Accessibility Essentials","desc":"Make your web apps accessible to everyone with practical checks.","thumb":"https://images.unsplash.com/photo-1526378721641-3b9b6f7f6b1b?q=80&w=1400&auto=format&fit=crop","category":"Education","channel":"A11y Works","date":"2025-05-01","views":"66K","duration":"7:30"}
-];
-const videoGrid = document.getElementById('videoGrid');
-const searchInput = document.getElementById('searchInput');
-const categorySelect = document.getElementById('categorySelect');
-const categoryList = document.getElementById('categoryList');
-const findBtn = document.getElementById('findBtn');
-const sortSelect = document.getElementById('sortSelect');
-const playerModal = document.getElementById('playerModal');
-const playerContent = document.getElementById('playerContent');
-const closeModal = document.getElementById('closeModal');
-function uniqueCategories(items){
-  return ['all',...Array.from(new Set(items.map(i=>i.category)))];
+const videos=[
+{title:"Top 30 JavaScript Interview Questions 2025",channel:"Intellipaat",cat:"javascript",thumb:"https://i.ytimg.com/vi/hdI2bqOjy3c/maxresdefault.jpg"},
+{title:"DOES GOD EXIST? Complete Video",channel:"Hajira Umer Kitchen",cat:"podcast",thumb:"https://i.ytimg.com/vi/PkZNo7MFNFg/maxresdefault.jpg"},
+{title:"AJ ka Horoscope | Lawyer aur Comedy",channel:"Triple Trouble",cat:"podcast",thumb:"https://i.ytimg.com/vi/9He4UBLyk8Y/maxresdefault.jpg"},
+{title:"Mix – Indian Pop",channel:"YouTube Mix",cat:"music",thumb:"https://i.ytimg.com/vi/PoRJizFvM7s/maxresdefault.jpg"},
+{title:"Big Arrest Late Night Headlines",channel:"Dunya News",cat:"news",thumb:"https://i.ytimg.com/vi/tgbNymZ7vqY/maxresdefault.jpg"},
+{title:"PIA Privatized Successfully",channel:"24 News HD",cat:"news",thumb:"https://i.ytimg.com/vi/ysz5S6PUM-U/maxresdefault.jpg"}
+]
+
+const grid=document.getElementById("grid")
+const search=document.getElementById("search")
+const chips=document.querySelectorAll(".chip")
+
+function render(list){
+grid.innerHTML=""
+list.map(v=>{
+const d=document.createElement("div")
+d.className="card"
+d.innerHTML=`
+<img src="${v.thumb}">
+<div class="info">
+<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23333'/><text x='50%' y='55%' fill='white' font-size='90' text-anchor='middle' font-family='Arial'>M</text></svg>">
+<div class="text">
+<h4>${v.title}</h4>
+<p>${v.channel}</p>
+</div>
+</div>`
+grid.appendChild(d)
+})
 }
-function populateCategories(){
-  const cats = uniqueCategories(videos);
-  categorySelect.innerHTML = '';
-  categoryList.innerHTML = '';
-  cats.forEach(c=>{
-    const opt = document.createElement('option');
-    opt.value = c;
-    opt.textContent = c;
-    categorySelect.appendChild(opt);
-    const li = document.createElement('li');
-    li.textContent = c;
-    li.dataset.cat = c;
-    li.tabIndex = 0;
+
+render(videos)
+
+search.oninput=e=>{
+const q=e.target.value.toLowerCase()
+render(videos.filter(v=>v.title.toLowerCase().includes(q)))
+}
+
+chips.forEach(c=>{
+c.onclick=()=>{
+chips.forEach(x=>x.classList.remove("active"))
+c.classList.add("active")
+const k=c.dataset.cat
+render(k==="all"?videos:videos.filter(v=>v.cat===k))
+}
+})    li.tabIndex = 0;
     li.addEventListener('click',()=>{document.querySelectorAll('.nav-cats li').forEach(n=>n.classList.remove('active'));li.classList.add('active');categorySelect.value = c;applyFilters()});
     li.addEventListener('keydown',e=>{if(e.key==='Enter'){li.click()}});
     categoryList.appendChild(li);
