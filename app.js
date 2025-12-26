@@ -1,60 +1,44 @@
 const videos=[
 {
-title:"Top 30 JavaScript Interview Questions 2025",
-desc:"Most asked JavaScript interview questions explained",
-channel:"Intellipaat",
+title:"JavaScript Interview Questions 2025",
+description:"Most asked JavaScript interview questions",
+channel:"Muhammad Hasan Dev",
 views:"317K views",
 time:"1 year ago",
-duration:"1:35:43",
-cat:"coding",
+category:"coding",
 thumb:"https://i.ytimg.com/vi/hdI2bqOjy3c/maxresdefault.jpg"
 },
 {
-title:"Full Stack Developer Roadmap",
-desc:"Complete roadmap to become a full stack developer",
-channel:"Muhammad Hasan Dev",
-views:"210K views",
-time:"8 months ago",
-duration:"42:11",
-cat:"coding",
-thumb:"https://i.ytimg.com/vi/9He4UBLyk8Y/maxresdefault.jpg"
-},
-{
-title:"DOES GOD EXIST? Complete Video",
-desc:"Academic discussion and debate",
-channel:"Hajira Umer Kitchen",
-views:"1.9M views",
-time:"6 days ago",
-duration:"1:54:11",
-cat:"podcast",
-thumb:"https://i.ytimg.com/vi/PkZNo7MFNFg/maxresdefault.jpg"
-},
-{
-title:"Big Arrest Late Night Headlines",
-desc:"Breaking news update Pakistan",
+title:"Breaking News Pakistan",
+description:"Latest political updates",
 channel:"Dunya News",
-views:"2K views",
-time:"1 hour ago",
-duration:"8:36",
-cat:"news",
+views:"12K views",
+time:"2 hours ago",
+category:"news",
 thumb:"https://i.ytimg.com/vi/tgbNymZ7vqY/maxresdefault.jpg"
+},
+{
+title:"Podcast: Reality Talks",
+description:"Deep discussion podcast",
+channel:"Hajira Umer",
+views:"98K views",
+time:"3 days ago",
+category:"podcast",
+thumb:"https://i.ytimg.com/vi/PkZNo7MFNFg/maxresdefault.jpg"
 }
 ]
 
-const grid=document.getElementById("grid")
-const search=document.getElementById("search")
+const grid=document.getElementById("videoGrid")
+const searchInput=document.getElementById("searchInput")
 const chips=document.querySelectorAll(".chip")
 
 function render(list){
 grid.innerHTML=""
-list.map(v=>{
-const d=document.createElement("div")
-d.className="card"
-d.innerHTML=`
-<div class="thumb-wrap">
-<img class="thumb" src="${v.thumb}">
-<span class="duration">${v.duration}</span>
-</div>
+list.forEach(v=>{
+const el=document.createElement("div")
+el.className="card"
+el.innerHTML=`
+<img src="${v.thumb}">
 <div class="info">
 <img src="profile.jpg">
 <div class="text">
@@ -62,184 +46,27 @@ d.innerHTML=`
 <p>${v.channel}</p>
 <p>${v.views} • ${v.time}</p>
 </div>
-</div>`
-grid.appendChild(d)
+</div>
+`
+grid.appendChild(el)
 })
 }
 
 render(videos)
 
-search.oninput=e=>{
-const q=e.target.value.toLowerCase()
+searchInput.addEventListener("input",()=>{
+const q=searchInput.value.toLowerCase()
 render(videos.filter(v=>
 v.title.toLowerCase().includes(q) ||
-v.desc.toLowerCase().includes(q)
+v.description.toLowerCase().includes(q)
 ))
-}
+})
 
-chips.forEach(c=>{
-c.onclick=()=>{
-chips.forEach(x=>x.classList.remove("active"))
-c.classList.add("active")
-const k=c.dataset.cat
-render(k==="all"?videos:videos.filter(v=>v.cat===k))
-}
-})}
-
-chips.forEach(c=>{
-c.onclick=()=>{
-chips.forEach(x=>x.classList.remove("active"))
-c.classList.add("active")
-const k=c.dataset.cat
-render(k==="all"?videos:videos.filter(v=>v.cat===k))
-}
-})    li.tabIndex = 0;
-    li.addEventListener('click',()=>{document.querySelectorAll('.nav-cats li').forEach(n=>n.classList.remove('active'));li.classList.add('active');categorySelect.value = c;applyFilters()});
-    li.addEventListener('keydown',e=>{if(e.key==='Enter'){li.click()}});
-    categoryList.appendChild(li);
-  });
-  const first = categoryList.querySelector('li');
-  if(first) first.classList.add('active');
-}
-function createCard(v){
-  const card = document.createElement('article');
-  card.className = 'card';
-  card.tabIndex = 0;
-  card.dataset.id = v.id;
-  const thumbWrap = document.createElement('div');
-  thumbWrap.className = 'thumb-wrap';
-  const img = document.createElement('img');
-  img.className = 'thumb';
-  img.loading = 'lazy';
-  img.src = v.thumb;
-  img.alt = v.title;
-  const dur = document.createElement('div');
-  dur.className = 'duration';
-  dur.textContent = v.duration;
-  thumbWrap.appendChild(img);
-  thumbWrap.appendChild(dur);
-  const meta = document.createElement('div');
-  meta.className = 'meta';
-  const avatar = document.createElement('img');
-  avatar.className = 'avatar';
-  avatar.src = 'profile.jpg';
-  avatar.alt = v.channel;
-  const info = document.createElement('div');
-  info.className = 'info';
-  const title = document.createElement('div');
-  title.className = 'title';
-  title.textContent = v.title;
-  const channel = document.createElement('div');
-  channel.className = 'channel';
-  channel.textContent = `${v.channel} • ${v.views} views • ${formatDate(v.date)}`;
-  const desc = document.createElement('div');
-  desc.className = 'desc';
-  desc.textContent = v.desc;
-  info.appendChild(title);
-  info.appendChild(channel);
-  info.appendChild(desc);
-  meta.appendChild(avatar);
-  meta.appendChild(info);
-  card.appendChild(thumbWrap);
-  card.appendChild(meta);
-  card.addEventListener('click',()=>openPlayer(v));
-  card.addEventListener('keydown',e=>{if(e.key==='Enter')openPlayer(v)});
-  return card;
-}
-function renderGrid(items){
-  videoGrid.innerHTML = '';
-  if(items.length===0){
-    const empty = document.createElement('div');
-    empty.textContent = 'No videos found';
-    empty.style.color = 'var(--muted)';
-    videoGrid.appendChild(empty);
-    return;
-  }
-  items.forEach(v=>videoGrid.appendChild(createCard(v)));
-}
-function applyFilters(){
-  const q = searchInput.value.trim().toLowerCase();
-  const cat = categorySelect.value;
-  const sort = sortSelect.value;
-  let filtered = videos.filter(v=>{
-    const inCat = cat==='all' || v.category===cat;
-    const inQuery = q==='' || v.title.toLowerCase().includes(q) || v.desc.toLowerCase().includes(q) || v.channel.toLowerCase().includes(q);
-    return inCat && inQuery;
-  });
-  if(sort==='newest'){filtered.sort((a,b)=>new Date(b.date)-new Date(a.date))}
-  if(sort==='oldest'){filtered.sort((a,b)=>new Date(a.date)-new Date(b.date))}
-  renderGrid(filtered);
-}
-function openPlayer(v){
-  playerContent.innerHTML = '';
-  const thumb = document.createElement('img');
-  thumb.className = 'player-thumb';
-  thumb.src = v.thumb;
-  thumb.alt = v.title;
-  const title = document.createElement('h2');
-  title.style.marginTop = '12px';
-  title.textContent = v.title;
-  const meta = document.createElement('div');
-  meta.className = 'meta-row';
-  meta.style.marginTop = '8px';
-  meta.textContent = `${v.channel} • ${v.views} views • ${formatDate(v.date)}`;
-  const desc = document.createElement('p');
-  desc.className = 'modal-desc';
-  desc.style.marginTop = '10px';
-  desc.style.color = 'var(--muted)';
-  desc.textContent = v.desc;
-  playerContent.appendChild(thumb);
-  playerContent.appendChild(title);
-  playerContent.appendChild(meta);
-  playerContent.appendChild(desc);
-  playerModal.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-}
-function closePlayer(){
-  playerModal.setAttribute('aria-hidden','true');
-  playerContent.innerHTML = '';
-  document.body.style.overflow = '';
-}
-closeModal.addEventListener('click',closePlayer);
-playerModal.addEventListener('click',e=>{if(e.target===playerModal)closePlayer()});
-searchInput.addEventListener('input',()=>applyFilters());
-categorySelect.addEventListener('change',()=>applyFilters());
-sortSelect.addEventListener('change',()=>applyFilters());
-findBtn.addEventListener('click',()=>{
-  const q = searchInput.value.trim().toLowerCase();
-  if(!q) return;
-  const found = videos.find(v=>v.title.toLowerCase().includes(q) || v.desc.toLowerCase().includes(q) || v.channel.toLowerCase().includes(q));
-  if(found){
-    const el = document.querySelector(`.card[data-id="${found.id}"]`);
-    if(el){
-      el.scrollIntoView({behavior:'smooth',block:'center'});
-      el.classList.add('highlight');
-      setTimeout(()=>el.classList.remove('highlight'),1800);
-      el.focus();
-    }
-  } else {
-    videoGrid.innerHTML = '';
-    const no = document.createElement('div');
-    no.textContent = 'No match found';
-    no.style.color = 'var(--muted)';
-    videoGrid.appendChild(no);
-  }
-});
-document.getElementById('clearSearch').addEventListener('click',()=>{
-  searchInput.value = '';
-  applyFilters();
-});
-function formatDate(d){
-  try{
-    const dt = new Date(d);
-    return dt.toLocaleDateString();
-  }catch(e){
-    return d;
-  }
-}
-document.getElementById('profilePic').addEventListener('error',function(){this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop'});
-function init(){
-  populateCategories();
-  renderGrid(videos);
-}
-init();
+chips.forEach(chip=>{
+chip.addEventListener("click",()=>{
+chips.forEach(c=>c.classList.remove("active"))
+chip.classList.add("active")
+const cat=chip.dataset.category
+render(cat==="all"?videos:videos.filter(v=>v.category===cat))
+})
+})
