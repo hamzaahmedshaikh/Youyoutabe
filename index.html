@@ -1,33 +1,83 @@
-<doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YouTube 2025 Clone</title>
+<title>YouTube 2025 — Clone</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="topbar">
-<div class="logo">YouTube<span class="year">2025</span></div>
-<div class="search">
-<input id="searchInput" placeholder="Search" />
-<select id="categorySelect">
+<div class="left">
+<button id="menuBtn" class="icon-btn"><i class="fa-solid fa-bars"></i></button>
+<div class="brand">
+<svg class="brand-mark" viewBox="0 0 100 30" aria-hidden="true" focusable="false">
+<rect width="100" height="30" rx="6" fill="#ff0000"></rect>
+<path d="M18 20 L30 15 L18 10 Z" fill="#fff"></path>
+</svg>
+<div class="brand-text">YouTube<span class="year">2025</span></div>
+</div>
+</div>
+<div class="search-wrap">
+<div class="search-input">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input id="searchInput" placeholder="Search" autocomplete="off">
+<button id="clearSearch" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div class="filters">
+<select id="categorySelect" aria-label="Category filter">
 <option value="all">All</option>
 </select>
+<button id="findBtn" class="btn">Find</button>
 </div>
-<div class="user">
+</div>
+<div class="right">
+<button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+<button class="icon-btn"><i class="fa-solid fa-video"></i></button>
+<div class="profile">
 <img id="profilePic" src="profile.jpg" alt="profile">
-<div class="userName">Hamza Ahmed Shaikh</div>
+<div class="profile-name">Hamza Ahmed Shaikh</div>
+</div>
 </div>
 </header>
-<main>
+<main class="main">
 <aside class="sidebar">
+<nav class="nav-cats">
 <ul id="categoryList"></ul>
+</nav>
+<div class="shortcuts">
+<button class="chip active" data-cat="all">Home</button>
+<button class="chip" data-cat="Development">Development</button>
+<button class="chip" data-cat="Education">Education</button>
+<button class="chip" data-cat="Design">Design</button>
+<button class="chip" data-cat="DevOps">DevOps</button>
+</div>
 </aside>
 <section class="content">
-<div id="videoGrid" class="grid"></div>
+<div class="controls">
+<div class="left-controls">
+<div class="badge">All videos</div>
+</div>
+<div class="right-controls">
+<label for="sortSelect" class="muted">Sort</label>
+<select id="sortSelect">
+<option value="relevance">Relevance</option>
+<option value="newest">Newest</option>
+<option value="oldest">Oldest</option>
+</select>
+</div>
+</div>
+<div id="videoGrid" class="grid" role="list"></div>
 </section>
 </main>
+<div id="playerModal" class="modal" aria-hidden="true">
+<div class="modal-card">
+<button id="closeModal" class="close"><i class="fa-solid fa-xmark"></i></button>
+<div id="playerContent"></div>
+</div>
+</div>
 <script src="app.js"></script>
 </body>
 </html>
