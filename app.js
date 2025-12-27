@@ -1,33 +1,36 @@
 const videos = [
   {
-    title: "JavaScript Interview Questions 2025",
+    title: "Create a Website in Just 12 Minutes Using Pure HTML | Beginner-Friendly Tutorial",
     description: "Most asked JavaScript interview questions",
     channel: "Muhammad Hasan Dev",
-    views: "317K views",
-    time: "1 year ago",
+    views: "207 views",
+    time: "8 monts ago",
     duration: "1:35:43",
     category: "coding",
-    thumb: "https://i.ytimg.com/vi/hdI2bqOjy3c/maxresdefault.jpg"
+    thumb: "hoverimg2.png",
+    hoverThumb: "v2.png"
   },
   {
-    title: "Full Stack Developer Roadmap",
+    title: "Build a Resume Website Using Only HTML | Step-by-Step Tutorial for Beginners",
     description: "Step by step roadmap for full stack developers",
     channel: "Muhammad Hasan Dev",
-    views: "210K views",
-    time: "8 months ago",
+    views: "284 views",
+    time: "11 months ago",
     duration: "42:11",
     category: "coding",
-    thumb: "https://i.ytimg.com/vi/9He4UBLyk8Y/maxresdefault.jpg"
+    thumb: "v3.jpg",
+    hoverThumb: "hoverimg.png"
   },
   {
-    title: "Advanced JavaScript Concepts",
-    description: "Closures, hoisting, async explained",
+    title: "How JavaScript Runs | Event Loop, Task Queue, Microtask Queue, Promises & Async/Await",
+    description: "Is video mein hum JavaScript ke behind the scenes concepts ko step-by-step aur simple language mein samjhenge. Agar aap JavaScript, React, ya MERN Stack seekh rahe ho, to ye video aap ke liye must watch hai. Is session mein hum cover karenge",
     channel: "Muhammad Hasan Dev",
-    views: "180K views",
-    time: "5 months ago",
-    duration: "58:22",
+    views: "72 views",
+    time: "8 days ago",
+    duration: "1:46:52",
     category: "coding",
-    thumb: "https://i.ytimg.com/vi/PoRJizFvM7s/maxresdefault.jpg"
+    thumb: "hoverimg3.png",
+    hoverThumb: "v1.png"
   },
   {
     title: "Breaking News Pakistan",
@@ -108,6 +111,24 @@ function renderVideos(list) {
         </div>
       </div>
     `
+
+   
+    if (video.hoverThumb) {
+      const img = card.querySelector(".thumb")
+      const original = video.thumb
+
+      
+      new Image().src = video.hoverThumb
+
+      img.addEventListener("mouseenter", () => {
+        img.src = video.hoverThumb
+      })
+
+      img.addEventListener("mouseleave", () => {
+        img.src = original
+      })
+    }
+
     grid.appendChild(card)
   })
 }
@@ -115,7 +136,7 @@ function renderVideos(list) {
 function applyFilters() {
   const query = searchInput.value.toLowerCase()
 
-  let filtered = videos.filter(video => {
+  const filtered = videos.filter(video => {
     const matchesCategory =
       activeCategory === "all" || video.category === activeCategory
 
